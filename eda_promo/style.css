@@ -738,6 +738,11 @@ body {
   align-items: center;
   gap: 1rem;
   margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.auto-card-header>div:nth-child(2) {
+  flex: 1;
 }
 
 .auto-card-icon {
@@ -1733,6 +1738,667 @@ body {
     flex-direction: column;
     gap: 0.75rem;
   }
+}
+
+/* ============================================================
+   TESTBENCH INTERACTIVE DEMO
+   ============================================================ */
+
+/* ── Demo Launch Button ─────────────────────────────────────── */
+.demo-launch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(0, 144, 255, 0.2));
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #c8b5ff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.demo-launch-btn:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(0, 144, 255, 0.35));
+  border-color: rgba(139, 92, 246, 0.55);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+}
+
+.demo-launch-btn svg {
+  stroke: currentColor;
+}
+
+/* ── Demo Overlay ───────────────────────────────────────────── */
+.demo-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.97);
+  transition: opacity 0.4s var(--ease-out-expo),
+    transform 0.4s var(--ease-out-expo),
+    visibility 0.4s;
+}
+
+.demo-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+/* ── Top Bar ───────────────────────────────────────────────── */
+.demo-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-glass);
+  flex-shrink: 0;
+}
+
+.demo-topbar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-purple);
+  letter-spacing: 0.03em;
+}
+
+.demo-close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.demo-close-btn:hover {
+  background: rgba(255, 77, 106, 0.12);
+  border-color: rgba(255, 77, 106, 0.3);
+  color: var(--accent-red);
+}
+
+/* ── Demo Body (3-column) ─────────────────────────────────── */
+.demo-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* ── Left Panel (Settings) ────────────────────────────────── */
+.demo-panel {
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-glass);
+  padding: 1.25rem;
+  overflow-y: auto;
+}
+
+.demo-panel-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+  letter-spacing: 0.04em;
+}
+
+.demo-panel-divider {
+  height: 1px;
+  background: var(--border-glass);
+  margin: 1rem 0;
+}
+
+.demo-field {
+  margin-bottom: 0.85rem;
+}
+
+.demo-field label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.03em;
+}
+
+.demo-field input[type="number"],
+.demo-field select {
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.demo-field input[type="number"]:focus,
+.demo-field select:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
+}
+
+.demo-field select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Range slider */
+.demo-field input[type="range"] {
+  width: calc(100% - 40px);
+  accent-color: var(--accent-purple);
+  vertical-align: middle;
+}
+
+.demo-field-value {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-purple);
+  margin-left: 0.4rem;
+}
+
+/* Radio group */
+.demo-field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.demo-radio-group {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.demo-radio {
+  font-size: 0.73rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.demo-radio input {
+  accent-color: var(--accent-purple);
+}
+
+/* Toggle switch */
+.demo-toggle-wrap {
+  position: relative;
+  width: 36px;
+  height: 20px;
+}
+
+.demo-toggle-wrap input {
+  display: none;
+}
+
+.demo-toggle-label {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.demo-toggle-label::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.25s ease;
+}
+
+.demo-toggle-wrap input:checked+.demo-toggle-label {
+  background: var(--accent-purple);
+}
+
+.demo-toggle-wrap input:checked+.demo-toggle-label::after {
+  transform: translateX(16px);
+}
+
+/* ── Waveform Panel ───────────────────────────────────────── */
+.demo-waveform-panel {
+  padding: 1.25rem;
+  border-right: 1px solid var(--border-glass);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.demo-section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.demo-live-badge {
+  font-size: 0.6rem;
+  color: #00e88f;
+  font-weight: 700;
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.demo-wave-container {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.demo-wave-svg {
+  width: 100%;
+  height: auto;
+}
+
+/* ── Code Panel ───────────────────────────────────────────── */
+.demo-code-panel {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.demo-code {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.72rem;
+  line-height: 1.65;
+  color: #c8d5e8;
+  overflow-y: auto;
+  white-space: pre;
+  tab-size: 2;
+  border: 1px solid rgba(100, 160, 255, 0.08);
+}
+
+/* ── Syntax highlighting ──────────────────────────────────── */
+.hl-kw {
+  color: #c792ea;
+  font-weight: 700;
+}
+
+.hl-tp {
+  color: #82aaff;
+}
+
+.hl-sig {
+  color: #00d4ff;
+}
+
+.hl-num {
+  color: #f78c6c;
+}
+
+.hl-cmt {
+  color: #546e7a;
+  font-style: italic;
+}
+
+/* ============================================================
+   CI/CD PIPELINE DEMO
+   ============================================================ */
+
+/* Gold variant of launch button */
+.demo-launch-btn-gold {
+  background: linear-gradient(135deg, rgba(255, 197, 69, 0.2), rgba(255, 159, 28, 0.2));
+  border-color: rgba(255, 197, 69, 0.35);
+  color: #ffe08a;
+}
+
+.demo-launch-btn-gold:hover {
+  background: linear-gradient(135deg, rgba(255, 197, 69, 0.35), rgba(255, 159, 28, 0.35));
+  border-color: rgba(255, 197, 69, 0.55);
+  box-shadow: 0 8px 24px rgba(255, 197, 69, 0.2);
+}
+
+/* CI/CD body: 2-column */
+.cicd-demo-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  overflow: hidden;
+}
+
+.cicd-main-area {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  overflow: hidden;
+}
+
+/* ── Pipeline vis ──────────────────────────────────────────── */
+.cicd-pipeline-vis {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.cicd-pipeline-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.cicd-nodes {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.cicd-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 60px;
+}
+
+.cicd-node-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.cicd-node-dot.running {
+  border-color: var(--stage-color, #ffc545);
+  color: var(--stage-color, #ffc545);
+  background: rgba(255, 197, 69, 0.1);
+  animation: nodeRunPulse 1.2s ease-in-out infinite;
+}
+
+.cicd-node-dot.passed {
+  border-color: #00e88f;
+  color: #fff;
+  background: rgba(0, 232, 143, 0.25);
+  box-shadow: 0 0 12px rgba(0, 232, 143, 0.3);
+}
+
+.cicd-node-dot.failed {
+  border-color: #ff4d6a;
+  color: #fff;
+  background: rgba(255, 77, 106, 0.25);
+  box-shadow: 0 0 12px rgba(255, 77, 106, 0.3);
+}
+
+@keyframes nodeRunPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 197, 69, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 16px 4px rgba(255, 197, 69, 0.15);
+  }
+}
+
+.cicd-node-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cicd-node-arrow {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.15);
+  margin: 0 0.15rem;
+  align-self: center;
+  margin-bottom: 1.2rem;
+}
+
+/* ── Stats cards ───────────────────────────────────────────── */
+.cicd-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.cicd-stat-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 10px;
+  padding: 0.75rem;
+  backdrop-filter: blur(16px);
+}
+
+.cicd-stat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.cicd-stat-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+.cicd-progress {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.cicd-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s var(--ease-out-expo);
+}
+
+/* ── Log panel ─────────────────────────────────────────────── */
+.cicd-log-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cicd-log {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.7rem;
+  line-height: 1.7;
+  color: #8899aa;
+  overflow-y: auto;
+  border: 1px solid rgba(100, 160, 255, 0.06);
+}
+
+.cicd-log-line {
+  white-space: pre-wrap;
+}
+
+.cicd-log-ts {
+  color: #546e7a;
+  margin-right: 0.4rem;
+}
+
+.cicd-log-pass {
+  color: #00e88f;
+  font-weight: 700;
+}
+
+.cicd-log-fail {
+  color: #ff4d6a;
+  font-weight: 700;
+}
+
+.cicd-log-run {
+  color: #ffc545;
+  font-weight: 700;
+}
+
+.cicd-log-info {
+  color: #00d4ff;
+}
+
+.cicd-log-sys {
+  color: #8b5cf6;
+  font-weight: 700;
+}
+
+/* ── Stage toggles ─────────────────────────────────────────── */
+.cicd-stage-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.cicd-stage-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.73rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.cicd-stage-toggle input {
+  accent-color: var(--accent-gold);
+}
+
+.cicd-stg-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ── Run / Reset buttons ───────────────────────────────────── */
+.cicd-run-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.65rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ffc545, #ff9f1c);
+  border: none;
+  color: #1a1a2e;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.cicd-run-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 197, 69, 0.35);
+}
+
+.cicd-run-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.cicd-run-btn svg {
+  stroke: #1a1a2e;
+}
+
+.cicd-reset-btn {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-size: 0.73rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cicd-reset-btn:hover {
+  background: rgba(255, 77, 106, 0.1);
+  border-color: rgba(255, 77, 106, 0.25);
+  color: var(--accent-red);
 }
 
 /* ---------- Print / Export Styles ---------- */

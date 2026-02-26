@@ -309,6 +309,14 @@
                             <div class="auto-card-title">CI/CD DevOps 자동화</div>
                             <div class="auto-card-subtitle">Siemens EDA 기반 파이프라인</div>
                         </div>
+                        <button class="demo-launch-btn demo-launch-btn-gold" id="btnLaunchCicdDemo"
+                            aria-label="CI/CD 데모 시연">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round">
+                                <polygon points="5 3 19 12 5 21 5 3" />
+                            </svg>
+                            데모 시연
+                        </button>
                     </div>
                     <div class="auto-card-body">
                         코드 커밋 → 정적 검증 → 시뮬레이션 → 리포트 생성까지
@@ -395,6 +403,13 @@
                             <div class="auto-card-title">테스트벤치 자동 생성</div>
                             <div class="auto-card-subtitle">사용자 친화적 GUI 제공</div>
                         </div>
+                        <button class="demo-launch-btn" id="btnLaunchDemo" aria-label="테스트벤치 데모 시연">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round">
+                                <polygon points="5 3 19 12 5 21 5 3" />
+                            </svg>
+                            데모 시연
+                        </button>
                     </div>
                     <div class="auto-card-body">
                         직관적 GUI로 <strong>클럭, 리셋, Stimulus, Assertion</strong>
@@ -493,6 +508,7 @@
                         <div class="auto-feat"><span class="feat-icon">🖥️</span> 실시간 미리보기</div>
                         <div class="auto-feat"><span class="feat-icon">💾</span> 템플릿 저장</div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -610,7 +626,237 @@
         </button>
     </div>
 
+    <!-- ============================================================
+       TESTBENCH DEMO OVERLAY
+       ============================================================ -->
+    <div class="demo-overlay" id="demoOverlay">
+        <!-- 상단 바 -->
+        <div class="demo-topbar">
+            <div class="demo-topbar-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                VerifyOps — TestBench Generator (Interactive Demo)
+            </div>
+            <button class="demo-close-btn" id="btnCloseDemo">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+                프레젠테이션으로 돌아가기
+            </button>
+        </div>
+
+        <!-- 데모 본체 -->
+        <div class="demo-body">
+            <!-- 좌측: 설정 패널 -->
+            <div class="demo-panel">
+                <div class="demo-panel-title">⏰ Clock Configuration</div>
+
+                <div class="demo-field">
+                    <label for="demoFreq">Frequency (MHz)</label>
+                    <input type="number" id="demoFreq" min="1" max="1000" value="100" step="1" />
+                </div>
+                <div class="demo-field">
+                    <label for="demoDuty">Duty Cycle (%)</label>
+                    <input type="range" id="demoDuty" min="10" max="90" value="50" />
+                    <span class="demo-field-value" id="demoDutyVal">50%</span>
+                </div>
+
+                <div class="demo-panel-divider"></div>
+                <div class="demo-panel-title">🔁 Reset Configuration</div>
+
+                <div class="demo-field demo-field-row">
+                    <label>Active Level</label>
+                    <div class="demo-radio-group">
+                        <label class="demo-radio"><input type="radio" name="rstLevel" value="low" checked />
+                            Active-Low</label>
+                        <label class="demo-radio"><input type="radio" name="rstLevel" value="high" />
+                            Active-High</label>
+                    </div>
+                </div>
+                <div class="demo-field">
+                    <label for="demoRstDelay">Reset Release Delay (ns)</label>
+                    <input type="number" id="demoRstDelay" min="10" max="5000" value="100" step="10" />
+                </div>
+
+                <div class="demo-panel-divider"></div>
+                <div class="demo-panel-title">📨 Data Port</div>
+
+                <div class="demo-field">
+                    <label for="demoDataWidth">Data Width (bits)</label>
+                    <select id="demoDataWidth">
+                        <option value="1">1</option>
+                        <option value="4">4</option>
+                        <option value="8" selected>8</option>
+                        <option value="16">16</option>
+                        <option value="32">32</option>
+                    </select>
+                </div>
+                <div class="demo-field demo-field-row">
+                    <label>Include valid signal</label>
+                    <div class="demo-toggle-wrap">
+                        <input type="checkbox" id="demoValid" checked />
+                        <label for="demoValid" class="demo-toggle-label"></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 중앙: 파형 미리보기 -->
+            <div class="demo-waveform-panel">
+                <div class="demo-section-title">Waveform Preview</div>
+                <div class="demo-wave-container" id="demoWaveContainer">
+                    <!-- JS에서 SVG 동적 생성 -->
+                </div>
+            </div>
+
+            <!-- 우측: 코드 미리보기 -->
+            <div class="demo-code-panel">
+                <div class="demo-section-title">
+                    Generated Verilog
+                    <span class="demo-live-badge">● LIVE</span>
+                </div>
+                <pre class="demo-code" id="demoCode"></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+       CI/CD PIPELINE DEMO OVERLAY
+       ============================================================ -->
+    <div class="demo-overlay cicd-demo-overlay" id="cicdDemoOverlay">
+        <div class="demo-topbar">
+            <div class="demo-topbar-title" style="color:var(--accent-gold);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                VerifyOps — CI/CD Pipeline (Interactive Demo)
+            </div>
+            <button class="demo-close-btn" id="btnCloseCicdDemo">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+                프레젠테이션으로 돌아가기
+            </button>
+        </div>
+
+        <div class="cicd-demo-body">
+            <!-- 좌측: 파이프라인 설정 -->
+            <div class="demo-panel">
+                <div class="demo-panel-title">⚙️ Pipeline Configuration</div>
+
+                <div class="demo-field">
+                    <label for="cicdProject">Project</label>
+                    <select id="cicdProject">
+                        <option value="radar_ctrl">radar_controller</option>
+                        <option value="comm_fpga">comm_fpga_top</option>
+                        <option value="sensor_if">sensor_interface</option>
+                    </select>
+                </div>
+                <div class="demo-field">
+                    <label for="cicdBranch">Branch</label>
+                    <select id="cicdBranch">
+                        <option value="main">main</option>
+                        <option value="develop">develop</option>
+                        <option value="feature/cdc-fix">feature/cdc-fix</option>
+                    </select>
+                </div>
+
+                <div class="demo-panel-divider"></div>
+                <div class="demo-panel-title">🔧 Stages (Toggle)</div>
+
+                <div class="cicd-stage-toggles">
+                    <label class="cicd-stage-toggle"><input type="checkbox" data-stage="lint" checked /><span
+                            class="cicd-stg-dot" style="background:#00e88f;"></span> Lint Check</label>
+                    <label class="cicd-stage-toggle"><input type="checkbox" data-stage="cdc" checked /><span
+                            class="cicd-stg-dot" style="background:#00d4ff;"></span> CDC Analysis</label>
+                    <label class="cicd-stage-toggle"><input type="checkbox" data-stage="sim" checked /><span
+                            class="cicd-stg-dot" style="background:#8b5cf6;"></span> Simulation</label>
+                    <label class="cicd-stage-toggle"><input type="checkbox" data-stage="coverage" checked /><span
+                            class="cicd-stg-dot" style="background:#ffc545;"></span> Coverage</label>
+                    <label class="cicd-stage-toggle"><input type="checkbox" data-stage="report" /><span
+                            class="cicd-stg-dot" style="background:#ff4d6a;"></span> Report Gen</label>
+                </div>
+
+                <div class="demo-panel-divider"></div>
+
+                <button class="cicd-run-btn" id="cicdRunBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    Run Pipeline
+                </button>
+                <button class="cicd-reset-btn" id="cicdResetBtn">Reset</button>
+            </div>
+
+            <!-- 중앙 상단: 파이프라인 시각화 + 통계 -->
+            <div class="cicd-main-area">
+                <!-- 파이프라인 노드 -->
+                <div class="cicd-pipeline-vis">
+                    <div class="cicd-pipeline-title">Pipeline #<span id="cicdBuildNum">1,248</span></div>
+                    <div class="cicd-nodes" id="cicdNodes">
+                        <!-- JS에서 동적 생성 -->
+                    </div>
+                </div>
+
+                <!-- 통계 카드 -->
+                <div class="cicd-stats" id="cicdStats">
+                    <div class="cicd-stat-card">
+                        <div class="cicd-stat-label">Pass Rate</div>
+                        <div class="cicd-stat-value" id="cicdPassRate" style="color:#00e88f;">—</div>
+                        <div class="cicd-progress">
+                            <div class="cicd-progress-fill" id="cicdPassBar" style="background:#00e88f;width:0%;"></div>
+                        </div>
+                    </div>
+                    <div class="cicd-stat-card">
+                        <div class="cicd-stat-label">Line Coverage</div>
+                        <div class="cicd-stat-value" id="cicdLineCov" style="color:#00d4ff;">—</div>
+                        <div class="cicd-progress">
+                            <div class="cicd-progress-fill" id="cicdLineBar" style="background:#00d4ff;width:0%;"></div>
+                        </div>
+                    </div>
+                    <div class="cicd-stat-card">
+                        <div class="cicd-stat-label">Branch Coverage</div>
+                        <div class="cicd-stat-value" id="cicdBranchCov" style="color:#8b5cf6;">—</div>
+                        <div class="cicd-progress">
+                            <div class="cicd-progress-fill" id="cicdBranchBar" style="background:#8b5cf6;width:0%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cicd-stat-card">
+                        <div class="cicd-stat-label">Duration</div>
+                        <div class="cicd-stat-value" id="cicdDuration" style="color:#ffc545;">—</div>
+                        <div class="cicd-progress">
+                            <div class="cicd-progress-fill" id="cicdDurBar" style="background:#ffc545;width:0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 로그 영역 -->
+                <div class="cicd-log-panel">
+                    <div class="demo-section-title">
+                        Console Output
+                        <span class="demo-live-badge" id="cicdLiveBadge" style="display:none;">● LIVE</span>
+                    </div>
+                    <div class="cicd-log" id="cicdLog">
+                        <div class="cicd-log-line"><span class="cicd-log-ts">--:--:--</span> <span
+                                class="cicd-log-sys">[SYS]</span> Pipeline ready. Press <strong>Run Pipeline</strong> to
+                            start.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="demo.js"></script>
+    <script src="demo-cicd.js"></script>
 </body>
 
 </html>
