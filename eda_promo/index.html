@@ -579,28 +579,147 @@
             </div>
 
             <div class="benefits-grid animate-in">
+
+                <!-- Card 1: 경쟁력 가속화 -->
                 <div class="benefit-item">
                     <div class="benefit-icon">🚀</div>
-                    <h3 class="benefit-title">경쟁력 가속화</h3>
-                    <p class="benefit-text">검증 자동화로 <strong>Time-to-Market 40% 단축</strong>. 반복 수작업 제거 및 설계 역량 집중 환경 제공.
-                    </p>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">경쟁력 가속화</h3>
+                        <p class="benefit-text">검증 자동화로 <strong>검증 사이클 단축</strong>. 반복 수작업 제거 및 설계 역량 집중 환경 제공.</p>
+                        <!-- Visual: Manual vs Automated workflow comparison -->
+                        <div class="benefit-visual bv-timeline">
+                            <div class="bvt-row">
+                                <span class="bvt-label">수작업</span>
+                                <div class="bvt-track">
+                                    <div class="bvt-bar bvt-before"></div>
+                                </div>
+                                <span class="bvt-val">장시간</span>
+                            </div>
+                            <div class="bvt-row">
+                                <span class="bvt-label">자동화</span>
+                                <div class="bvt-track">
+                                    <div class="bvt-bar bvt-after"></div>
+                                </div>
+                                <span class="bvt-val bvt-accent">단축</span>
+                            </div>
+                            <div class="bvt-note">
+                                <span class="bvt-badge">▼ 사이클 타임 단축</span>
+                                <span class="bvt-sublabel">반복 수작업 → 자동 파이프라인</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Card 2: 품질 무결성 -->
                 <div class="benefit-item">
                     <div class="benefit-icon">🛡️</div>
-                    <h3 class="benefit-title">품질 무결성</h3>
-                    <p class="benefit-text">CI/CD 및 테스트벤치 자동화로 <strong>Human Error 원천 차단</strong>. 고신뢰성 원전·방산 규격 부합 품질
-                        확보.</p>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">품질 무결성</h3>
+                        <p class="benefit-text">CI/CD 및 테스트벤치 자동화로 <strong>Human Error 원천 차단</strong>. 고신뢰성 원전·방산 규격 부합
+                            품질 확보.</p>
+                        <!-- Visual: Verification checklist -->
+                        <div class="benefit-visual bv-checklist">
+                            <div class="bvcl-item bvcl-delay-1">
+                                <span class="bvcl-check">✓</span>
+                                <span class="bvcl-name">Lint Check</span>
+                                <span class="bvcl-badge pass">PASS</span>
+                            </div>
+                            <div class="bvcl-item bvcl-delay-2">
+                                <span class="bvcl-check">✓</span>
+                                <span class="bvcl-name">CDC Analysis</span>
+                                <span class="bvcl-badge pass">PASS</span>
+                            </div>
+                            <div class="bvcl-item bvcl-delay-3">
+                                <span class="bvcl-check">✓</span>
+                                <span class="bvcl-name">Formal Verify</span>
+                                <span class="bvcl-badge pass">PASS</span>
+                            </div>
+                            <div class="bvcl-cov">
+                                <span class="bvcl-covlabel">검증 커버리지</span>
+                                <div class="bvcl-covtrack">
+                                    <div class="bvcl-covfill"></div>
+                                </div>
+                                <span class="bvcl-covpct">97%</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Card 3: 지식 자산 표준화 -->
                 <div class="benefit-item">
                     <div class="benefit-icon">💎</div>
-                    <h3 class="benefit-title">지식 자산 표준화</h3>
-                    <p class="benefit-text">검증 노하우의 <strong>공통 라이브러리 및 템플릿 자산화</strong>. 신규 인력 투입 시 즉각 생산성 유지.</p>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">지식 자산 표준화</h3>
+                        <p class="benefit-text">검증 노하우의 <strong>공통 라이브러리 및 템플릿 자산화</strong>. 신규 인력 투입 시 즉각 생산성 유지.</p>
+                        <!-- Visual: Knowledge node network -->
+                        <div class="benefit-visual bv-network">
+                            <svg class="bvn-svg" viewBox="0 0 280 90" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Edges -->
+                                <line class="bvn-edge bvn-e1" x1="140" y1="45" x2="35" y2="18" />
+                                <line class="bvn-edge bvn-e2" x1="140" y1="45" x2="245" y2="18" />
+                                <line class="bvn-edge bvn-e3" x1="140" y1="45" x2="35" y2="72" />
+                                <line class="bvn-edge bvn-e4" x1="140" y1="45" x2="245" y2="72" />
+                                <!-- Center node -->
+                                <circle class="bvn-center" cx="140" cy="45" r="24" />
+                                <text class="bvn-center-label" x="140" y="40" text-anchor="middle">공통</text>
+                                <text class="bvn-center-label" x="140" y="53" text-anchor="middle">라이브러리</text>
+                                <!-- Leaf nodes -->
+                                <circle class="bvn-leaf bvn-l1" cx="35" cy="18" r="16" />
+                                <text class="bvn-leaf-label" x="35" y="22" text-anchor="middle">IP Core</text>
+                                <circle class="bvn-leaf bvn-l2" cx="245" cy="18" r="16" />
+                                <text class="bvn-leaf-label" x="245" y="22" text-anchor="middle">TB Lib</text>
+                                <circle class="bvn-leaf bvn-l3" cx="35" cy="72" r="16" />
+                                <text class="bvn-leaf-label" x="35" y="76" text-anchor="middle">Script</text>
+                                <circle class="bvn-leaf bvn-l4" cx="245" cy="72" r="16" />
+                                <text class="bvn-leaf-label" x="245" y="76" text-anchor="middle">Report</text>
+                                <!-- Pulse ring -->
+                                <circle class="bvn-pulse" cx="140" cy="45" r="24" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Card 4: 완성형 환경 자립 -->
                 <div class="benefit-item">
                     <div class="benefit-icon">🔗</div>
-                    <h3 class="benefit-title">완성형 환경 자립</h3>
-                    <p class="benefit-text">폐쇄 환경 최적화 <strong>구축형 플랫폼</strong>. 외부 기술 의존 탈피 및 독자적 검증 생태계 구축.</p>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">완성형 환경 자립</h3>
+                        <p class="benefit-text">폐쇄 환경 최적화 <strong>구축형 플랫폼</strong>. 외부 기술 의존 탈피 및 독자적 검증 생태계 구축.</p>
+                        <!-- Visual: Air-gap network boundary diagram -->
+                        <div class="benefit-visual bv-airgap">
+                            <svg class="bvag-svg" viewBox="0 0 300 118" xmlns="http://www.w3.org/2000/svg">
+                                <!-- External zone (blocked) -->
+                                <rect class="bvag-ext-zone" x="2" y="2" width="296" height="36" rx="6" />
+                                <text class="bvag-ext-label" x="90" y="23">인터넷 / 외부 클라우드</text>
+                                <text class="bvag-ext-icon" x="220" y="25">☁️ 🌐</text>
+                                <!-- Block barrier -->
+                                <rect class="bvag-barrier" x="2" y="42" width="296" height="10" rx="3" />
+                                <text class="bvag-barrier-label" x="150" y="51" text-anchor="middle">🔒 차단
+                                    (Air-Gap)</text>
+                                <!-- Internal zone -->
+                                <rect class="bvag-int-zone" x="2" y="56" width="296" height="58" rx="6" />
+                                <text class="bvag-int-title" x="150" y="70" text-anchor="middle">폐쇄망 내부 · VerifyOps
+                                    플랫폼</text>
+                                <!-- Internal components -->
+                                <rect class="bvag-comp" x="10" y="76" width="72" height="30" rx="5" />
+                                <text class="bvag-comp-icon" x="46" y="89">⚙️</text>
+                                <text class="bvag-comp-label" x="46" y="101">검증 엔진</text>
+                                <rect class="bvag-comp" x="114" y="76" width="72" height="30" rx="5" />
+                                <text class="bvag-comp-icon" x="150" y="89">📚</text>
+                                <text class="bvag-comp-label" x="150" y="101">라이브러리</text>
+                                <rect class="bvag-comp" x="218" y="76" width="72" height="30" rx="5" />
+                                <text class="bvag-comp-icon" x="254" y="89">📊</text>
+                                <text class="bvag-comp-label" x="254" y="101">리포트</text>
+                                <!-- Internal flow arrows -->
+                                <line class="bvag-int-arrow" x1="82" y1="91" x2="114" y2="91" />
+                                <polygon class="bvag-arrowhead" points="114,88 120,91 114,94" />
+                                <line class="bvag-int-arrow" x1="186" y1="91" x2="218" y2="91" />
+                                <polygon class="bvag-arrowhead" points="218,88 224,91 218,94" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
             <div class="benefits-summary animate-in">
@@ -618,7 +737,7 @@
             </div>
 
             <div class="cta-center animate-in">
-                <div class="cta-title-large">VerifyOps로<br />검증 혁신 시작</div>
+                <div class="cta-title-large">VerifyOps로 검증 혁신 시작</div>
                 <div class="cta-desc-large">
                     귀사의 FPGA 설계·검증 프로세스 분석,<br />
                     최적의 자동화 솔루션 맞춤 제안.

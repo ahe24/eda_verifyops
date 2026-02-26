@@ -36,8 +36,8 @@
   /* Typography */
   --font-sans: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Spacing */
-  --slide-padding: clamp(2rem, 5vw, 6rem);
+  /* Spacing — uses rem so it scales with the html font-size above */
+  --slide-padding: clamp(1.8rem, 3.5vw, 4.5rem);
 
   /* Transitions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -53,7 +53,10 @@
 }
 
 html {
-  font-size: 16px;
+  /* Scales ALL rem-based sizes proportionally with the viewport.
+     Formula: the short side of the screen drives the base size.
+     1366px screen → ~15px  |  1920px → ~18px  |  2560px → ~22px  */
+  font-size: clamp(13px, min(1.1vw, 1.9vh), 22px);
   scroll-behavior: smooth;
 }
 
@@ -82,7 +85,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: var(--slide-padding);
-  padding-top: 5.5rem;
+  padding-top: clamp(4rem, 5.5vh, 6rem);
   /* 상단 고정 헤더(EDNC 로고·nav) 겹침 방지 */
   opacity: 0;
   visibility: hidden;
@@ -209,9 +212,9 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(3rem, min(8vw, 10vh), 7rem);
   font-weight: 900;
-  line-height: 1.15;
+  line-height: 1.1;
   background: var(--grad-hero);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -221,10 +224,10 @@ body {
 }
 
 .hero-subtitle {
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-size: clamp(1.1rem, min(2.2vw, 3vh), 2rem);
   font-weight: 400;
   color: var(--text-secondary);
-  max-width: 700px;
+  max-width: 800px;
   line-height: 1.6;
   margin-bottom: 2.5rem;
   animation: fadeInUp 0.8s var(--ease-out-expo) 0.6s both;
@@ -296,8 +299,9 @@ body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 1.5rem;
-  align-items: center;
+  align-items: stretch;
   flex: 1;
+  min-height: 0;
 }
 
 /* Left / Right columns */
@@ -454,7 +458,7 @@ body {
 }
 
 .slide-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: clamp(1rem, 2.5vh, 2.5rem);
 }
 
 .slide-label {
@@ -482,7 +486,7 @@ body {
 }
 
 .slide-heading {
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.8rem, min(4.5vw, 6.5vh), 4rem);
   font-weight: 800;
   line-height: 1.2;
   color: var(--text-primary);
@@ -512,6 +516,9 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.25rem;
+  flex: 1;
+  min-height: 0;
+  align-content: stretch;
 }
 
 .problem-card {
@@ -523,6 +530,8 @@ body {
   transition: transform 0.4s var(--ease-out-expo),
     border-color 0.4s ease,
     box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .problem-card:hover {
@@ -594,6 +603,8 @@ body {
   display: flex;
   gap: 1.25rem;
   align-items: stretch;
+  flex: 1;
+  min-height: 0;
 }
 
 .solution-step {
@@ -936,17 +947,19 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  max-width: 600px;
+  max-width: min(900px, 80vw);
+  width: 100%;
 }
 
 .cta-title-large {
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-size: clamp(2.2rem, min(4vw, 7vh), 4.5rem);
   font-weight: 900;
   line-height: 1.2;
   background: var(--grad-hero);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  white-space: nowrap;
 }
 
 .cta-desc-large {
@@ -958,8 +971,10 @@ body {
 .cta-contact-row {
   display: flex;
   gap: 2rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .cta-btn-large {
@@ -1230,7 +1245,7 @@ body {
   animation-delay: 0.6s;
 }
 
-/* ---------- Responsive ---------- */
+/* ---------- Responsive (small screens) ---------- */
 @media (max-width: 1024px) {
   .solution-flow {
     flex-direction: column;
@@ -1256,6 +1271,79 @@ body {
 
   .auto-features {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- High-Resolution Screens ---------- */
+/* The html font-size clamp() handles most scaling automatically.
+   These breakpoints fine-tune layout spacing for ultra-wide / 4K. */
+
+@media (min-width: 1600px) {
+  .reality-layout {
+    gap: 2rem;
+  }
+
+  .problem-grid {
+    gap: 1.5rem;
+  }
+
+  .solution-flow {
+    gap: 1.5rem;
+  }
+
+  .auto-grid {
+    gap: 2rem;
+  }
+
+  .auto-card {
+    padding: 2.25rem;
+  }
+
+  .mockup-frame {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .slide-header {
+    margin-bottom: clamp(1.25rem, 2vh, 3rem);
+  }
+
+  .step-features li {
+    padding: 0.35rem 0;
+    padding-left: 1.4rem;
+    font-size: 0.85rem;
+  }
+
+  .reality-item {
+    padding: 1.1rem 1.25rem;
+  }
+
+  .reality-risk {
+    padding: 0.9rem 1.25rem;
+  }
+
+  .problem-card {
+    padding: 1.75rem;
+  }
+
+  .stat-callout {
+    margin-top: 2rem;
+    padding: 1.25rem 1.75rem;
+  }
+
+  .benefits-grid {
+    gap: 2rem;
+  }
+
+  .benefit-item {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  .slide-header {
+    margin-bottom: 2rem;
   }
 }
 
@@ -1334,7 +1422,7 @@ body {
 /* ---------- UI Mockup: CI/CD Dashboard ---------- */
 .mockup-cicd {
   display: flex;
-  height: 180px;
+  height: clamp(150px, 16vh, 240px);
 }
 
 .mockup-sidebar {
@@ -1537,7 +1625,7 @@ body {
 /* ---------- UI Mockup: TestBench GUI ---------- */
 .mockup-tb {
   display: flex;
-  height: 180px;
+  height: clamp(150px, 16vh, 240px);
 }
 
 .mockup-tb-sidebar {
@@ -1707,39 +1795,6 @@ body {
   font-style: italic;
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 1024px) {
-  .solution-flow {
-    flex-direction: column;
-  }
-
-  .flow-arrow {
-    transform: rotate(90deg);
-  }
-
-  .auto-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .success-wide {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .problem-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .auto-features {
-    grid-template-columns: 1fr;
-  }
-
-  .cta-contact-row {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-}
 
 /* ============================================================
    TESTBENCH INTERACTIVE DEMO
@@ -2405,22 +2460,28 @@ body {
 /* ========== SLIDE: EXPECTED BENEFITS ========== */
 .benefits-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin: 1rem 0 2rem 0;
   width: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
 .benefit-item {
   background: var(--bg-glass);
   border: 1px solid var(--border-glass);
-  padding: 1.75rem 1.25rem;
+  padding: 1.75rem 2rem;
   border-radius: 20px;
-  text-align: center;
+  text-align: left;
   transition: all 0.4s var(--ease-out-expo);
   backdrop-filter: blur(16px);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.25rem;
 }
 
 .benefit-item:hover {
@@ -2431,23 +2492,25 @@ body {
 }
 
 .benefit-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1.25rem;
+  font-size: 1.8rem;
   background: rgba(255, 197, 69, 0.1);
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
-  margin: 0 auto 1.25rem auto;
+  border-radius: 14px;
+  flex-shrink: 0;
+  margin: 0;
+  border: 1px solid rgba(255, 197, 69, 0.2);
 }
 
 .benefit-title {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--accent-gold);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
 }
 
@@ -2456,6 +2519,12 @@ body {
   color: var(--text-secondary);
   line-height: 1.6;
   text-align: left;
+}
+
+/* Wrapper for title+text inside benefit-item row */
+.benefit-item>div:not(.benefit-icon) {
+  display: flex;
+  flex-direction: column;
 }
 
 .benefits-summary {
@@ -2468,6 +2537,691 @@ body {
   color: var(--text-primary);
   font-style: italic;
   letter-spacing: 0.02em;
+  margin-top: auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* ── Benefit Card Content Wrapper ─────────────────────── */
+.benefit-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+/* ── Benefit Visual Base ──────────────────────────────── */
+.benefit-visual {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  flex: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   VISUAL 1: Timeline Bar Chart (경쟁력 가속화)
+═══════════════════════════════════════════════ */
+.bv-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.bvt-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bvt-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  width: 3.5rem;
+  flex-shrink: 0;
+  font-family: 'Courier New', monospace;
+}
+
+.bvt-track {
+  flex: 1;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bvt-bar {
+  height: 100%;
+  border-radius: 5px;
+  transform-origin: left;
+  animation: bvtGrow 1.4s var(--ease-out-expo) 0.3s both;
+}
+
+.bvt-before {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(255, 100, 100, 0.5), rgba(255, 80, 80, 0.7));
+}
+
+.bvt-after {
+  width: 60%;
+  background: linear-gradient(90deg, var(--accent-cyan), rgba(0, 200, 130, 0.8));
+  animation-duration: 1.6s;
+}
+
+@keyframes bvtGrow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.bvt-val {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  width: 2.5rem;
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+.bvt-accent {
+  color: var(--accent-green);
+  font-weight: 700;
+}
+
+.bvt-note {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.2rem;
+}
+
+.bvt-badge {
+  display: inline-block;
+  background: rgba(0, 232, 143, 0.15);
+  border: 1px solid rgba(0, 232, 143, 0.35);
+  color: var(--accent-green);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  animation: bvtPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes bvtPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 232, 143, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 0 5px rgba(0, 232, 143, 0);
+  }
+}
+
+.bvt-sublabel {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════
+   VISUAL 2: Checklist (품질 무결성)
+═══════════════════════════════════════════════ */
+.bv-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.bvcl-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  opacity: 0;
+  animation: bvclFadeIn 0.4s ease both;
+}
+
+.bvcl-delay-1 {
+  animation-delay: 0.4s;
+}
+
+.bvcl-delay-2 {
+  animation-delay: 0.8s;
+}
+
+.bvcl-delay-3 {
+  animation-delay: 1.2s;
+}
+
+@keyframes bvclFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.bvcl-check {
+  color: var(--accent-green);
+  font-weight: 900;
+  font-size: 0.75rem;
+  width: 1rem;
+}
+
+.bvcl-name {
+  flex: 1;
+  color: var(--text-secondary);
+  font-family: 'Courier New', monospace;
+}
+
+.bvcl-badge {
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.bvcl-badge.pass {
+  background: rgba(0, 232, 143, 0.15);
+  color: var(--accent-green);
+  border: 1px solid rgba(0, 232, 143, 0.3);
+}
+
+.bvcl-cov {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bvcl-covlabel {
+  font-size: 0.58rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.bvcl-covtrack {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bvcl-covfill {
+  height: 100%;
+  width: 97%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+  border-radius: 3px;
+  transform-origin: left;
+  animation: bvtGrow 1.8s var(--ease-out-expo) 1.5s both;
+}
+
+.bvcl-covpct {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-green);
+  font-family: 'Courier New', monospace;
+}
+
+/* ═══════════════════════════════════════════════
+   VISUAL 3: Node Network SVG (지식 자산 표준화)
+═══════════════════════════════════════════════ */
+.bv-network {
+  padding: 0.3rem;
+  overflow: visible;
+}
+
+.bvn-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  min-height: 80px;
+}
+
+.bvn-edge {
+  stroke: rgba(139, 92, 246, 0.4);
+  stroke-width: 1.5;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: bvnDraw 0.7s ease both;
+}
+
+.bvn-e1 {
+  animation-delay: 0.2s;
+}
+
+.bvn-e2 {
+  animation-delay: 0.4s;
+}
+
+.bvn-e3 {
+  animation-delay: 0.6s;
+}
+
+.bvn-e4 {
+  animation-delay: 0.8s;
+}
+
+@keyframes bvnDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.bvn-center {
+  fill: rgba(139, 92, 246, 0.2);
+  stroke: rgba(139, 92, 246, 0.7);
+  stroke-width: 1.5;
+}
+
+.bvn-center-label {
+  font-size: 7px;
+  fill: #c8b5ff;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+}
+
+.bvn-leaf {
+  fill: rgba(0, 144, 255, 0.12);
+  stroke: rgba(0, 144, 255, 0.5);
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: bvnPop 0.4s ease both;
+}
+
+.bvn-l1 {
+  animation-delay: 0.3s;
+}
+
+.bvn-l2 {
+  animation-delay: 0.5s;
+}
+
+.bvn-l3 {
+  animation-delay: 0.7s;
+}
+
+.bvn-l4 {
+  animation-delay: 0.9s;
+}
+
+@keyframes bvnPop {
+  from {
+    opacity: 0;
+    r: 5;
+  }
+
+  to {
+    opacity: 1;
+    r: 15;
+  }
+}
+
+.bvn-leaf-label {
+  font-size: 6.5px;
+  fill: var(--accent-blue);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  opacity: 0;
+  animation: bvclFadeIn 0.3s ease both;
+}
+
+.bvn-l1~text {
+  animation-delay: 0.4s;
+}
+
+.bvn-l2~text {
+  animation-delay: 0.6s;
+}
+
+.bvn-l3~text {
+  animation-delay: 0.8s;
+}
+
+.bvn-l4~text {
+  animation-delay: 1.0s;
+}
+
+.bvn-pulse {
+  fill: none;
+  stroke: rgba(139, 92, 246, 0.5);
+  stroke-width: 1;
+  animation: bvnPulseRing 2s ease-in-out 1s infinite;
+}
+
+@keyframes bvnPulseRing {
+  0% {
+    r: 22;
+    opacity: 0.8;
+    stroke-width: 1;
+  }
+
+  100% {
+    r: 38;
+    opacity: 0;
+    stroke-width: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   VISUAL 4: Closed-loop Cycle (완성형 환경 자립)
+═══════════════════════════════════════════════ */
+.bv-cycle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.bvc-nodes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+}
+
+.bvc-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  background: rgba(0, 144, 255, 0.1);
+  border: 1px solid rgba(0, 144, 255, 0.28);
+  border-radius: 10px;
+  padding: 0.4rem 0.6rem;
+  flex: 1;
+  transition: all 0.3s ease;
+  animation: bvcNodeIn 0.5s ease both;
+}
+
+.bvc-n1 {
+  animation-delay: 0.2s;
+}
+
+.bvc-n2 {
+  animation-delay: 0.5s;
+}
+
+.bvc-n3 {
+  animation-delay: 0.8s;
+}
+
+@keyframes bvcNodeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bvc-node:hover {
+  background: rgba(0, 144, 255, 0.18);
+  border-color: rgba(0, 144, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.bvc-icon {
+  font-size: 1.1rem;
+}
+
+.bvc-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  font-family: 'Courier New', monospace;
+}
+
+.bvc-arrow {
+  color: rgba(0, 144, 255, 0.6);
+  font-size: 1rem;
+  flex-shrink: 0;
+  animation: bvcArrowPulse 1.5s ease-in-out infinite;
+}
+
+.bvc-a-right:nth-child(2) {
+  animation-delay: 0s;
+}
+
+.bvc-a-right:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bvcArrowPulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.bvc-return-row {
+  position: relative;
+  height: 16px;
+  overflow: hidden;
+}
+
+.bvc-return-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 144, 255, 0.18);
+  border-radius: 1px;
+}
+
+.bvc-return-arrow {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(0, 232, 143, 0.7);
+  font-size: 0.55rem;
+  white-space: nowrap;
+  letter-spacing: -0.05em;
+  animation: bvcReturnScroll 3s linear infinite;
+}
+
+@keyframes bvcReturnScroll {
+  0% {
+    transform: translateX(0%) translateY(-50%);
+  }
+
+  100% {
+    transform: translateX(-30%) translateY(-50%);
+  }
+}
+
+.bvc-badge-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.bvc-badge {
+  font-size: 0.58rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(0, 144, 255, 0.1);
+  border: 1px solid rgba(0, 144, 255, 0.25);
+  color: var(--accent-blue);
+}
+
+.bvc-badge-gold {
+  background: rgba(255, 197, 69, 0.1);
+  border-color: rgba(255, 197, 69, 0.3);
+  color: var(--accent-gold);
+}
+
+/* ═══════════════════════════════════════════════
+   VISUAL 4 (new): Air-Gap Network Diagram (완성형 환경 자립)
+═══════════════════════════════════════════════ */
+.bv-airgap {
+  padding: 0.3rem;
+  overflow: visible;
+}
+
+.bvag-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  min-height: 90px;
+}
+
+/* External (internet) zone — muted red/danger */
+.bvag-ext-zone {
+  fill: rgba(255, 77, 106, 0.06);
+  stroke: rgba(255, 77, 106, 0.28);
+  stroke-width: 1;
+  stroke-dasharray: 4 2;
+}
+
+.bvag-ext-label {
+  font-size: 8px;
+  fill: rgba(255, 120, 140, 0.7);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.bvag-ext-icon {
+  font-size: 9px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Barrier / wall — amber pulse */
+.bvag-barrier {
+  fill: rgba(255, 197, 69, 0.15);
+  stroke: rgba(255, 197, 69, 0.5);
+  stroke-width: 1;
+  animation: bvagBarrierPulse 2s ease-in-out infinite;
+}
+
+@keyframes bvagBarrierPulse {
+
+  0%,
+  100% {
+    fill: rgba(255, 197, 69, 0.12);
+  }
+
+  50% {
+    fill: rgba(255, 197, 69, 0.25);
+  }
+}
+
+.bvag-barrier-label {
+  font-size: 7px;
+  fill: var(--accent-gold);
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Internal (closed network) zone — blue */
+.bvag-int-zone {
+  fill: rgba(0, 144, 255, 0.06);
+  stroke: rgba(0, 144, 255, 0.35);
+  stroke-width: 1.5;
+  animation: bvagIntPulse 3s ease-in-out infinite;
+}
+
+@keyframes bvagIntPulse {
+
+  0%,
+  100% {
+    stroke-opacity: 0.35;
+  }
+
+  50% {
+    stroke-opacity: 0.7;
+  }
+}
+
+.bvag-int-title {
+  font-size: 7px;
+  fill: rgba(100, 180, 255, 0.85);
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Internal platform components */
+.bvag-comp {
+  fill: rgba(0, 144, 255, 0.1);
+  stroke: rgba(0, 144, 255, 0.3);
+  stroke-width: 1;
+  animation: bvnPop 0.5s ease both;
+}
+
+.bvag-comp:nth-of-type(1) {
+  animation-delay: 0.2s;
+}
+
+.bvag-comp:nth-of-type(2) {
+  animation-delay: 0.4s;
+}
+
+.bvag-comp:nth-of-type(3) {
+  animation-delay: 0.6s;
+}
+
+.bvag-comp-icon {
+  font-size: 9px;
+  font-family: 'Inter', sans-serif;
+  text-anchor: middle;
+}
+
+.bvag-comp-label {
+  font-size: 6.5px;
+  fill: rgba(150, 200, 255, 0.9);
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-anchor: middle;
+}
+
+/* Internal flow arrows */
+.bvag-int-arrow {
+  stroke: rgba(0, 200, 255, 0.6);
+  stroke-width: 1.5;
+  animation: bvagArrowFade 1.5s ease-in-out infinite;
+}
+
+.bvag-arrowhead {
+  fill: rgba(0, 200, 255, 0.7);
+  animation: bvagArrowFade 1.5s ease-in-out infinite;
+}
+
+@keyframes bvagArrowFade {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 /* ---------- Print / Export Styles ---------- */
