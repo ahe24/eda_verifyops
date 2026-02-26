@@ -135,73 +135,22 @@
       }
     });
 
-    // Mouse wheel navigation — manually scroll slide content, change slide at edges
-    let wheelTimeout;
-    let edgeScrollCount = 0;
-    const EDGE_THRESHOLD = 3;
-
+    // Mouse wheel navigation — Only for vertical scrolling inside a slide, NOT for changing slides
     presentation.addEventListener('wheel', (e) => {
-      e.preventDefault();
-
       const activeSlide = slides[currentSlide];
       const hasOverflow = activeSlide.scrollHeight > activeSlide.clientHeight + 5;
 
       if (hasOverflow) {
-        const atTop = activeSlide.scrollTop <= 0;
-        const atBottom = activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight - 5;
-        const goingDown = e.deltaY > 0;
-        const goingUp = e.deltaY < 0;
-
-        // Not at edge → scroll the slide content
-        if ((goingDown && !atBottom) || (goingUp && !atTop)) {
-          activeSlide.scrollBy({ top: e.deltaY, behavior: 'auto' });
-          edgeScrollCount = 0;
-          return;
-        }
-
-        // At edge → require repeated scrolls before changing slide
-        edgeScrollCount++;
-        if (edgeScrollCount < EDGE_THRESHOLD) {
-          return;
-        }
+        // Allow default vertical scrolling if there's content to scroll
+        // Do not call e.preventDefault() to allow natural OS scroll behavior
+      } else {
+        // If no overflow, we still don't want to change slides via wheel
+        e.preventDefault();
       }
-
-      // Change slide
-      edgeScrollCount = 0;
-      clearTimeout(wheelTimeout);
-      wheelTimeout = setTimeout(() => {
-        if (e.deltaY > 0) {
-          goToSlide(currentSlide + 1);
-        } else if (e.deltaY < 0) {
-          goToSlide(currentSlide - 1);
-        }
-      }, 80);
     }, { passive: false });
 
-    // Touch navigation
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    presentation.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
-
-    presentation.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].screenX;
-      const touchEndY = e.changedTouches[0].screenY;
-      const diffX = touchStartX - touchEndX;
-      const diffY = touchStartY - touchEndY;
-
-      // Only respond to horizontal swipes
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          goToSlide(currentSlide + 1);
-        } else {
-          goToSlide(currentSlide - 1);
-        }
-      }
-    }, { passive: true });
+    // Touch navigation — Disabled slide changing via swipe as per user request
+    // We keep default touch scrolling behavior for overflow content
   }
 
   // ---- Boot ----
