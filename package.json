@@ -1,0 +1,31 @@
+{
+  "name": "eda-verifyops",
+  "version": "1.0.0",
+  "description": "VerifyOps — FPGA 설계·검증 혁신 플랫폼 (EDNC)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "tsc --project tsconfig.json",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop verifyops-promo",
+    "pm2:restart": "pm2 restart verifyops-promo",
+    "pm2:logs": "pm2 logs verifyops-promo"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.5",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Changseon Jo <cs.jo@ednc.com>",
+  "license": "UNLICENSED",
+  "private": true
+}
