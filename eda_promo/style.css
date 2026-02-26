@@ -2464,8 +2464,7 @@ body {
   gap: 1.5rem;
   margin: 1rem 0 2rem 0;
   width: 100%;
-  flex: 1;
-  min-height: 0;
+  flex: 1 0 auto;
 }
 
 .benefit-item {
@@ -2794,6 +2793,7 @@ body {
 }
 
 .bvn-edge {
+  fill: none;
   stroke: rgba(139, 92, 246, 0.4);
   stroke-width: 1.5;
   stroke-dasharray: 120;
