@@ -569,6 +569,486 @@ body {
   color: var(--text-secondary);
 }
 
+/* Custom Animations for Problem Cards */
+/* Custom Animations for Problem Cards */
+.card-visual {
+  margin-top: 1rem;
+  margin-bottom: -1.5rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-glass);
+  border-radius: 0 0 16px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 1. Glitch */
+.anim-path-glitch {
+  stroke: var(--accent-red);
+  stroke-dasharray: 150;
+  stroke-dashoffset: 150;
+  animation: glitchDraw 2.5s infinite var(--ease-out-expo);
+}
+
+.anim-glitch-dot {
+  opacity: 0;
+  transform-origin: 55px 20px;
+  animation: glitchDot 2.5s infinite;
+}
+
+@keyframes glitchDraw {
+  0% {
+    stroke-dashoffset: 150;
+    opacity: 1;
+  }
+
+  40%,
+  80% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes glitchDot {
+
+  0%,
+  35% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  40%,
+  80% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+/* 2. CDC */
+.anim-clk1,
+.anim-clk2 {
+  stroke-dasharray: 200;
+  animation: clkMove 3s infinite linear;
+}
+
+.anim-cdc-alert {
+  opacity: 0;
+  transform-origin: 45px 8px;
+  animation: cdcAlert 3s infinite;
+}
+
+@keyframes clkMove {
+  0% {
+    stroke-dashoffset: 200;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes cdcAlert {
+
+  0%,
+  40% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  50%,
+  80% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* 3. Bug Scan */
+.anim-bug-scan {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  overflow: hidden;
+  color: var(--text-primary);
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
+  animation: scanMove 3s infinite ease-in-out;
+  z-index: 2;
+}
+
+.the-bug {
+  position: absolute;
+  right: 15px;
+  top: 6px;
+  font-size: 1.3rem;
+  opacity: 0;
+  animation: revealBug 3s infinite;
+  z-index: 1;
+}
+
+@keyframes scanMove {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes revealBug {
+
+  0%,
+  75% {
+    opacity: 0;
+  }
+
+  85%,
+  95% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 4. Timeline */
+.anim-timeline {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.timeline-expected,
+.timeline-actual {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.timeline-expected span,
+.timeline-actual span {
+  width: 45px;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.bar-exp {
+  height: 6px;
+  width: 50%;
+  background: var(--border-glass);
+  border-radius: 3px;
+}
+
+.timeline-actual {
+  color: var(--accent-red);
+}
+
+.bar-act {
+  height: 6px;
+  background: var(--accent-red);
+  border-radius: 3px;
+  animation: actFill 4s infinite ease-out;
+}
+
+.bar-delay {
+  font-size: 0.65rem;
+  color: #fff;
+  background: var(--accent-red);
+  padding: 1px 4px;
+  border-radius: 3px;
+  opacity: 0;
+  animation: actDelay 4s infinite ease-out;
+}
+
+@keyframes actFill {
+  0% {
+    width: 0%;
+  }
+
+  30% {
+    width: 50%;
+  }
+
+  50%,
+  80% {
+    width: 90%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+@keyframes actDelay {
+
+  0%,
+  40% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  50%,
+  80% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+
+/* --- Expanded Animations for SVG Graphics --- */
+.anim-waveform {
+  stroke: var(--accent-cyan);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.anim-glitch-path {
+  stroke: var(--accent-red);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: glitchDraw 2s infinite var(--ease-out-expo);
+}
+
+.glitch-flash {
+  animation: flashRed 2s infinite;
+}
+
+@keyframes flashRed {
+
+  0%,
+  35% {
+    opacity: 0;
+  }
+
+  40%,
+  60% {
+    opacity: 1;
+    fill: rgba(239, 68, 68, 0.2);
+  }
+
+  65%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cdc-domain-bg {
+  fill: var(--bg-primary);
+  stroke: var(--border-glass);
+  stroke-width: 1;
+}
+
+.cdc-signal {
+  stroke: var(--accent-gold);
+  stroke-width: 1.5;
+  stroke-dasharray: 6;
+  animation: signalDash 1.5s infinite linear;
+}
+
+@keyframes signalDash {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+.cdc-meta-alert {
+  transform-origin: 100px 50px;
+  animation: metaPulse 2s infinite;
+}
+
+@keyframes metaPulse {
+
+  0%,
+  40% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50%,
+  80% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.cov-bar-bg {
+  fill: rgba(100, 116, 139, 0.2);
+}
+
+.cov-bar-fill {
+  fill: var(--accent-blue);
+  animation: buildCov 3s infinite steps(5);
+}
+
+@keyframes buildCov {
+  0% {
+    width: 10px;
+  }
+
+  50%,
+  100% {
+    width: 65px;
+  }
+}
+
+.bug-sprite {
+  font-size: 1.2rem;
+  opacity: 0;
+  animation: bugPop 3s infinite;
+}
+
+.bug-text {
+  opacity: 0;
+  animation: bugPop 3s infinite;
+}
+
+@keyframes bugPop {
+
+  0%,
+  60% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  70%,
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+}
+
+.tl-text {
+  font-size: 8px;
+  font-weight: 600;
+  fill: var(--text-secondary);
+  font-family: var(--font-sans);
+}
+
+.tl-track {
+  stroke: var(--border-glass);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.tl-fill-ok {
+  stroke: var(--accent-green);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.tl-fill-err {
+  stroke: var(--accent-red);
+  stroke-width: 6;
+  stroke-linecap: round;
+  animation: tlErrGrow 4s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes tlErrGrow {
+
+  0%,
+  20% {
+    stroke-dasharray: 0, 100;
+  }
+
+  50%,
+  85% {
+    stroke-dasharray: 70, 100;
+  }
+
+  100% {
+    stroke-dasharray: 0, 100;
+  }
+}
+
+.tl-delay-badge {
+  opacity: 0;
+  animation: tlBadgeShow 4s infinite;
+}
+
+@keyframes tlBadgeShow {
+
+  0%,
+  45% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  55%,
+  85% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
 /* ---------- Stat Callout ---------- */
 .stat-callout {
   display: flex;
