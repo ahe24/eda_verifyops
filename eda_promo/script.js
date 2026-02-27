@@ -1,5 +1,5 @@
 /* ============================================================
-   VerifyOps — Slide Navigation & Interaction Logic
+   AutoSafex — Slide Navigation & Interaction Logic
    ============================================================ */
 
 (function () {

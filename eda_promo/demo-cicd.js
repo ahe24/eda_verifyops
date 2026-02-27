@@ -1,5 +1,5 @@
 /* ============================================================
-   VerifyOps — CI/CD Pipeline Interactive Demo
+   AutoSafex — CI/CD Pipeline Interactive Demo
    파이프라인 실행 시뮬레이션: 스테이지 순차 진행, 로그 스트리밍,
    통계 실시간 갱신
    ============================================================ */
@@ -184,7 +184,7 @@
             report: [
                 { d: 200, type: 'run', msg: 'Generating HTML report...' },
                 { d: 1000, type: 'info', msg: 'Archiving results → /results/build_' + buildNum + '/' },
-                { d: 500, type: 'pass', msg: 'Report published — <strong>verifyops/reports/' + buildNum + '</strong>' },
+                { d: 500, type: 'pass', msg: 'Report published — <strong>autosafex/reports/' + buildNum + '</strong>' },
             ],
         };
 

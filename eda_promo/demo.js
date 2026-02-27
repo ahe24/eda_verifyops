@@ -1,5 +1,5 @@
 /* ============================================================
-   VerifyOps — TestBench Interactive Demo
+   AutoSafex — TestBench Interactive Demo
    폼 입력 변경 시 Verilog 코드 + SVG 파형을 실시간 갱신
    ============================================================ */
 (function () {
@@ -76,7 +76,7 @@
 
         let code = '';
         code += c('// ──────────────────────────────────────────') + '\n';
-        code += c(`// Auto-generated testbench — VerifyOps`) + '\n';
+        code += c(`// Auto-generated testbench — AutoSafex`) + '\n';
         code += c(`// Clock: ${freqMHz} MHz (period ${periodNs} ns, duty ${duty}%)`) + '\n';
         code += c(`// Reset: ${rstLevel === 'low' ? 'Active-Low' : 'Active-High'}, release after ${rstDelay} ns`) + '\n';
         code += c(`// Data width: ${dataWidth} bit${dataWidth > 1 ? 's' : ''}`) + '\n';
