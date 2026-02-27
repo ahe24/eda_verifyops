@@ -3,7 +3,7 @@
    Premium dark-theme with glassmorphism & modern 2025 aesthetics
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap');
 
 /* ---------- CSS Variables (Design Tokens) ---------- */
 :root {
@@ -213,15 +213,38 @@ body {
 }
 
 .hero-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: clamp(3rem, min(8vw, 10vh), 7rem);
   font-weight: 900;
   line-height: 1.1;
+  margin-bottom: 1.25rem;
+  animation: fadeInUp 0.8s var(--ease-out-expo) 0.4s both;
+}
+
+.brand-text {
   background: var(--grad-hero);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 1.25rem;
-  animation: fadeInUp 0.8s var(--ease-out-expo) 0.4s both;
+  letter-spacing: -0.02em;
+}
+
+.brand-x {
+  font-family: 'Orbitron', var(--font-sans);
+  font-size: 1.15em;
+  font-weight: 900;
+  /* 너무 밝지 않은 고급스러운 메탈릭 블루 / 딥 시안 그라데이션 */
+  background: linear-gradient(135deg, #0284c7 0%, #0891b2 50%, #0369a1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  transform: skewX(-12deg) translateY(0px);
+  margin-left: 0.1rem;
+  /* 과도한 네온 삭제하고, 무게감을 더하는 딥한 텍스트 섀도우 */
+  filter: drop-shadow(0 2px 4px rgba(2, 132, 199, 0.25));
 }
 
 .hero-subtitle {
@@ -1805,7 +1828,7 @@ body {
 }
 
 .khnp-logo img {
-  height: 34px;
+  height: 42px;
   width: auto;
 }
 
