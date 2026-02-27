@@ -13,6 +13,7 @@
   --bg-card: rgba(255, 255, 255, 0.9);
   --bg-glass: rgba(255, 255, 255, 0.75);
   --border-glass: rgba(15, 30, 60, 0.08);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 
   /* Accent colors */
   --accent-blue: #0284c7;
@@ -329,12 +330,14 @@ body {
   border-radius: 12px;
   padding: 0.85rem 1rem;
   backdrop-filter: blur(16px);
-  transition: transform 0.35s var(--ease-out-expo), border-color 0.35s ease;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.35s var(--ease-out-expo), border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .reality-item:hover {
   transform: translateY(-3px);
   border-color: rgba(255, 165, 50, 0.3);
+  box-shadow: 0 12px 32px rgba(255, 165, 50, 0.15);
 }
 
 .reality-item-icon {
@@ -423,12 +426,14 @@ body {
   border-radius: 12px;
   padding: 0.75rem 1rem;
   backdrop-filter: blur(16px);
-  transition: transform 0.35s var(--ease-out-expo), border-color 0.35s ease;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.35s var(--ease-out-expo), border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .reality-risk:hover {
   transform: translateY(-3px);
   border-color: rgba(255, 77, 106, 0.3);
+  box-shadow: 0 12px 32px rgba(255, 77, 106, 0.15);
 }
 
 .risk-badge {
@@ -530,6 +535,7 @@ body {
   border-radius: 16px;
   padding: 1.5rem;
   backdrop-filter: blur(20px);
+  box-shadow: var(--card-shadow);
   transition: transform 0.4s var(--ease-out-expo),
     border-color 0.4s ease,
     box-shadow 0.4s ease;
@@ -1097,6 +1103,7 @@ body {
   border-radius: 16px;
   padding: 1.5rem;
   backdrop-filter: blur(20px);
+  box-shadow: var(--card-shadow);
   position: relative;
   transition: transform 0.4s var(--ease-out-expo),
     border-color 0.4s ease,
@@ -1181,6 +1188,99 @@ body {
   flex-shrink: 0;
 }
 
+/* Step Image */
+.step-image-wrap {
+  margin-top: 1.5rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  margin-bottom: -1.5rem;
+  overflow: hidden;
+  border-radius: 0 0 16px 16px;
+  cursor: zoom-in;
+  position: relative;
+}
+
+.step-image-wrap::after {
+  content: 'Click to Enlarge';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.step-image-wrap:hover::after {
+  opacity: 1;
+}
+
+.step-image-wrap img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.step-image-wrap:hover img {
+  transform: scale(1.05);
+}
+
+/* Lightbox Modal */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.lightbox-title {
+  color: #fff;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: calc(90vh - 40px);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
 /* ---------- Slide 4: Automation ---------- */
 .slide-automation .ambient-glow.glow-1 {
   width: 500px;
@@ -1202,8 +1302,9 @@ body {
   border-radius: 16px;
   padding: 2rem;
   backdrop-filter: blur(20px);
+  box-shadow: var(--card-shadow);
   transition: transform 0.4s var(--ease-out-expo),
-    border-color 0.4s ease;
+    border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .auto-card:hover {
@@ -1545,6 +1646,7 @@ body {
   padding: 2rem;
   backdrop-filter: blur(20px);
   text-align: center;
+  box-shadow: var(--card-shadow);
 }
 
 .cta-title {
@@ -1703,7 +1805,7 @@ body {
 }
 
 .khnp-logo img {
-  height: 28px;
+  height: 34px;
   width: auto;
 }
 
@@ -2976,6 +3078,7 @@ body {
   padding: 1.75rem 2rem;
   border-radius: 20px;
   text-align: left;
+  box-shadow: var(--card-shadow);
   transition: all 0.4s var(--ease-out-expo);
   backdrop-filter: blur(16px);
   position: relative;

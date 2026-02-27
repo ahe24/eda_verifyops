@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AutoSafex — FPGA 설계·검증 혁신 플랫폼. Siemens EDA 기반 CI/CD 자동화 솔루션." />
-    <title>AutoSafex — FPGA 설계·검증 혁신 플랫폼</title>
+    <meta name="description" content="AutoSafeX — FPGA 설계·검증 혁신 플랫폼. Siemens EDA 기반 CI/CD 자동화 솔루션." />
+    <title>AutoSafeX — FPGA 설계·검증 혁신 플랫폼</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -36,7 +36,7 @@
                 Siemens EDA 기반 CI/CD 솔루션
             </div> -->
 
-            <h1 class="hero-title">AutoSafex</h1>
+            <h1 class="hero-title">AutoSafeX</h1>
             <p class="hero-subtitle">
                 FPGA 설계·검증의 복잡함을 자동화로 혁신<br />
                 Siemens EDA 기반 CI/CD DevOps 솔루션
@@ -350,6 +350,10 @@
                         <li>데드코드 / 도달 불가 상태 탐지</li>
                         <li>Formal Property 검증</li>
                     </ul>
+                    <div class="step-image-wrap"
+                        onclick="openLightbox('images/sc_lint.png', '정적 검증 (Static Analysis)')">
+                        <img src="images/sc_lint.png" alt="정적 검증 화면">
+                    </div>
                 </div>
 
                 <div class="flow-arrow">→</div>
@@ -368,6 +372,10 @@
                         <li>Glitch 감지</li>
                         <li>구조적/기능적 CDC 검증</li>
                     </ul>
+                    <div class="step-image-wrap"
+                        onclick="openLightbox('images/sc_cdc_ex.png', 'CDC 검증 (Clock Domain Crossing)')">
+                        <img src="images/sc_cdc_ex.png" alt="CDC 검증 화면">
+                    </div>
                 </div>
 
                 <div class="flow-arrow">→</div>
@@ -386,6 +394,10 @@
                         <li>기능 커버리지 추적</li>
                         <li>파형 디버깅 & 분석</li>
                     </ul>
+                    <div class="step-image-wrap"
+                        onclick="openLightbox('images/sc_coverage.png', '동적 검증 (Dynamic Simulation)')">
+                        <img src="images/sc_coverage.png" alt="동적 검증 화면">
+                    </div>
                 </div>
             </div>
         </section>
@@ -437,7 +449,7 @@
                     <div class="mockup-frame">
                         <div class="mockup-titlebar">
                             <div class="mockup-dots"><span></span><span></span><span></span></div>
-                            <div class="mockup-titlebar-text">AutoSafex — Pipeline Dashboard</div>
+                            <div class="mockup-titlebar-text">AutoSafeX — Pipeline Dashboard</div>
                         </div>
                         <div class="mockup-cicd">
                             <div class="mockup-sidebar">
@@ -530,7 +542,7 @@
                     <div class="mockup-frame">
                         <div class="mockup-titlebar">
                             <div class="mockup-dots"><span></span><span></span><span></span></div>
-                            <div class="mockup-titlebar-text">AutoSafex — TestBench Generator</div>
+                            <div class="mockup-titlebar-text">AutoSafeX — TestBench Generator</div>
                         </div>
                         <div class="mockup-tb">
                             <div class="mockup-tb-sidebar">
@@ -692,7 +704,7 @@
                     EXPECTED BENEFITS
                 </div>
                 <h2 class="slide-heading">
-                    AutoSafex가 가져올 <span class="highlight-gold">미래 가치</span>
+                    AutoSafeX가 가져올 <span class="highlight-gold">미래 가치</span>
                 </h2>
             </div>
 
@@ -816,7 +828,7 @@
                                     (Network Segregation)</text>
                                 <!-- Internal zone -->
                                 <rect class="bvag-int-zone" x="2" y="56" width="296" height="58" rx="6" />
-                                <text class="bvag-int-title" x="150" y="70" text-anchor="middle">폐쇄망 내부 · AutoSafex
+                                <text class="bvag-int-title" x="150" y="70" text-anchor="middle">폐쇄망 내부 · AutoSafeX
                                     플랫폼</text>
                                 <!-- Internal components -->
                                 <rect class="bvag-comp" x="10" y="76" width="72" height="30" rx="5" />
@@ -881,7 +893,7 @@
                     stroke-linecap="round">
                     <polygon points="5 3 19 12 5 21 5 3" />
                 </svg>
-                AutoSafex — TestBench Generator (Interactive Demo)
+                AutoSafeX — TestBench Generator (Interactive Demo)
             </div>
             <button class="demo-close-btn" id="btnCloseDemo">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -977,7 +989,7 @@
                     stroke-linecap="round">
                     <polygon points="5 3 19 12 5 21 5 3" />
                 </svg>
-                AutoSafex — CI/CD Pipeline (Interactive Demo)
+                AutoSafeX — CI/CD Pipeline (Interactive Demo)
             </div>
             <button class="demo-close-btn" id="btnCloseCicdDemo">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -1101,10 +1113,28 @@
             </div>
         </div>
     </div>
+    <!-- Lightbox Modal -->
+    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()" style="display:none;">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <div class="lightbox-title" id="lightboxTitle"></div>
+            <img id="lightboxImg" src="" alt="확대된 이미지" class="lightbox-img">
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="demo.js"></script>
     <script src="demo-cicd.js"></script>
+    <script>
+        function openLightbox(imgSrc, titleText) {
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightboxTitle').textContent = titleText;
+            document.getElementById('imageLightbox').style.display = 'flex';
+        }
+        function closeLightbox() {
+            document.getElementById('imageLightbox').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
