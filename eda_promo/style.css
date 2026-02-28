@@ -13,7 +13,7 @@
   --bg-card: rgba(255, 255, 255, 0.9);
   --bg-glass: rgba(255, 255, 255, 0.75);
   --border-glass: rgba(15, 30, 60, 0.08);
-  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 16px 48px rgba(0, 0, 0, 0.15), 0 6px 16px rgba(0, 0, 0, 0.1);
 
   /* Accent colors */
   --accent-blue: #0284c7;
@@ -336,7 +336,7 @@ body {
 }
 
 .reality-col-title {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -417,7 +417,7 @@ body {
 }
 
 .rc-label {
-  font-size: 1.0rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -461,7 +461,7 @@ body {
 
 .risk-badge {
   flex-shrink: 0;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   padding: 0.2rem 0.55rem;
@@ -1733,6 +1733,14 @@ body {
 }
 
 /* ---------- Navigation (top-right, slim) ---------- */
+.nav-logo {
+  height: 18px;
+  width: auto;
+  margin-right: 0.3rem;
+  margin-left: 0.1rem;
+  opacity: 0.85;
+}
+
 .nav-controls {
   position: fixed;
   top: 1.5rem;
@@ -2750,8 +2758,8 @@ body {
   background: #0f172a;
   border-radius: 10px;
   padding: 1rem 1.25rem;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.72rem;
+  font-family: 'Cascadia Code', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  font-size: 1.0rem;
   line-height: 1.65;
   color: #c8d5e8;
   overflow-y: auto;
@@ -2971,10 +2979,8 @@ body {
   background: #0f172a;
   border-radius: 10px;
   padding: 0.75rem 1rem;
-  font-family: 'JetBrains Mono',
-    'Fira Code',
-    monospace;
-  font-size: 0.7rem;
+  font-family: 'Cascadia Code', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  font-size: 1.0rem;
   line-height: 1.7;
   color: #8899aa;
   overflow-y: auto;
