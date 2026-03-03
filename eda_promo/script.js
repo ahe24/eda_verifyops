@@ -136,14 +136,32 @@
   // ---- Trigger Slide Animations ----
   function triggerAnimations(index) {
     const slide = slides[index];
-    const animItems = slide.querySelectorAll('.animate-in');
 
-    // Reset animations
+    // 1) .animate-in 요소 (슬라이드 헤더/본문 공통)
+    const animItems = slide.querySelectorAll('.animate-in');
     animItems.forEach(item => {
       item.style.animation = 'none';
       item.offsetHeight; // Force reflow
       item.style.animation = '';
     });
+
+    // 2) 체크리스트 항목 (bvcl-item) — 순차 PASS 애니메이션 재시작
+    const bvclItems = slide.querySelectorAll('.bvcl-item');
+    bvclItems.forEach(item => {
+      item.style.animation = 'none';
+      item.style.opacity = '0';
+      item.offsetHeight; // Force reflow
+      item.style.animation = '';
+      item.style.opacity = '';
+    });
+
+    // 3) 커버리지 바 (bvcl-covfill) — 슬라이드 진입 후 채워지는 애니메이션 재시작
+    const covFill = slide.querySelector('.bvcl-covfill');
+    if (covFill) {
+      covFill.style.animation = 'none';
+      covFill.offsetHeight; // Force reflow
+      covFill.style.animation = '';
+    }
   }
 
   // ---- Event Bindings ----
