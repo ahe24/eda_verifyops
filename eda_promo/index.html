@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="AutoSafeX — FPGA 설계·검증 혁신 플랫폼. Siemens EDA 기반 CI/CD 자동화 솔루션." />
     <title>AutoSafeX — FPGA 설계·검증 혁신 플랫폼</title>
-    <link rel="stylesheet" href="style.css?v=20260303e" />
+    <link rel="stylesheet" href="style.css?v=20260303f" />
 </head>
 
 <body>
@@ -394,16 +394,18 @@
             <div class="solution-flow animate-in">
                 <!-- Step 1 -->
                 <div class="solution-step">
-                    <div class="step-number">1</div>
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <div class="step-title">정적 검증 (Static Analysis)</div>
+                    </div>
                     <span class="step-tool">Questa Formal / Lint</span>
-                    <div class="step-title">정적 검증 (Static Analysis)</div>
                     <div class="step-desc">
                         시뮬레이션 없이 RTL 코드의 잠재적 결함을 사전에 발견 및 평가
                     </div>
                     <ul class="step-features">
                         <li>코딩 규칙 위반 자동 검출</li>
                         <li>리셋 도메인 분석</li>
-                        <li>데드코드 / 도달 불가 상태 탐지</li>
+                        <li>Dead Code / Unreachable 상태 탐지</li>
                         <li>Formal Property 검증</li>
                     </ul>
                     <div class="step-image-wrap"
@@ -416,9 +418,11 @@
 
                 <!-- Step 2 -->
                 <div class="solution-step">
-                    <div class="step-number">2</div>
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <div class="step-title">CDC 검증 (Clock Domain Crossing)</div>
+                    </div>
                     <span class="step-tool">Questa CDC</span>
-                    <div class="step-title">CDC 검증 (Clock Domain Crossing)</div>
                     <div class="step-desc">
                         멀티 클럭 도메인 간 데이터 전달의 안전성 보장
                     </div>
@@ -438,9 +442,11 @@
 
                 <!-- Step 3 -->
                 <div class="solution-step">
-                    <div class="step-number">3</div>
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <div class="step-title">동적 검증 (Dynamic Simulation)</div>
+                    </div>
                     <span class="step-tool">QuestaSim</span>
-                    <div class="step-title">동적 검증 (Dynamic Simulation)</div>
                     <div class="step-desc">
                         동작 시나리오 기반 기능 검증으로 요구사항 충족 여부 및 안정성 보장
                     </div>
