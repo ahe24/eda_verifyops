@@ -3210,46 +3210,89 @@ body {
   gap: 0.55rem;
 }
 
-.bvt-row {
+/* ═══════════════════════════════════════════════
+   VISUAL 1: KPI 비교 카드 (경쟁력 가속화)
+═══════════════════════════════════════════════ */
+.bv-kpi {
   display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.bvk-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto 1fr;
   align-items: center;
   gap: 0.5rem;
-}
-
-.bvt-label {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  width: 3.5rem;
-  flex-shrink: 0;
-  font-family: 'Courier New', monospace;
-}
-
-.bvt-track {
-  flex: 1;
-  height: 10px;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
-  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  animation-name: bvkSlideIn;
+  animation-duration: 0.5s;
+  animation-timing-function: var(--ease-out-expo);
+  animation-fill-mode: both;
+}
+
+.bvk-row:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.bvk-row:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.bvk-row:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bvkSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.bvk-metric {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.bvt-bar {
-  height: 100%;
-  border-radius: 5px;
-  transform-origin: left;
-  animation: bvtGrow 2.5s var(--ease-out-expo) 0.3s both;
+.bvk-sep {
+  display: none;
 }
 
-.bvt-before {
-  width: 100%;
-  background: linear-gradient(90deg, rgba(255, 100, 100, 0.5), rgba(255, 80, 80, 0.7));
+.bvk-before {
+  font-size: 0.88rem;
+  color: rgba(239, 68, 68, 0.8);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-.bvt-after {
-  width: 60%;
-  background: linear-gradient(90deg, var(--accent-cyan), rgba(0, 200, 130, 0.8));
-  animation-duration: 3s;
+.bvk-arrow {
+  font-size: 0.9rem;
+  color: var(--accent-cyan);
+  text-align: center;
 }
 
+.bvk-after {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--accent-green);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* bvtGrow 키프레임은 아래 bvcl에서도 사용 — 유지 */
 @keyframes bvtGrow {
   from {
     transform: scaleX(0);
@@ -3258,38 +3301,6 @@ body {
   to {
     transform: scaleX(1);
   }
-}
-
-.bvt-val {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  width: 2.5rem;
-  text-align: right;
-  font-family: 'Courier New', monospace;
-}
-
-.bvt-accent {
-  color: var(--accent-green);
-  font-weight: 700;
-}
-
-.bvt-note {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.2rem;
-}
-
-.bvt-badge {
-  display: inline-block;
-  background: rgba(0, 232, 143, 0.15);
-  border: 1px solid rgba(0, 232, 143, 0.35);
-  color: var(--accent-green);
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 0.15rem 0.5rem;
-  border-radius: 20px;
-  animation: bvtPulse 4s ease-in-out infinite;
 }
 
 @keyframes bvtPulse {
@@ -3302,11 +3313,6 @@ body {
   50% {
     box-shadow: 0 0 0 5px rgba(0, 232, 143, 0);
   }
-}
-
-.bvt-sublabel {
-  font-size: 0.6rem;
-  color: #94a3b8;
 }
 
 /* ═══════════════════════════════════════════════
@@ -3322,7 +3328,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.65rem;
+  font-size: 1rem;
   opacity: 0;
   animation: bvclFadeIn 0.4s ease both;
 }
@@ -3354,8 +3360,8 @@ body {
 .bvcl-check {
   color: var(--accent-green);
   font-weight: 900;
-  font-size: 0.75rem;
-  width: 1rem;
+  font-size: 1.1rem;
+  width: 1.2rem;
 }
 
 .bvcl-name {
@@ -3365,9 +3371,9 @@ body {
 }
 
 .bvcl-badge {
-  font-size: 0.55rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  padding: 0.1rem 0.4rem;
+  padding: 0.18rem 0.6rem;
   border-radius: 4px;
   letter-spacing: 0.05em;
 }
@@ -3388,7 +3394,7 @@ body {
 }
 
 .bvcl-covlabel {
-  font-size: 0.58rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
   white-space: nowrap;
 }
@@ -3411,7 +3417,7 @@ body {
 }
 
 .bvcl-covpct {
-  font-size: 0.65rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--accent-green);
   font-family: 'Courier New', monospace;
