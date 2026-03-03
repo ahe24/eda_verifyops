@@ -13,6 +13,7 @@
   const navDots = document.getElementById('navDots');
   const navIndicator = document.getElementById('navIndicator');
   const slideNumber = document.getElementById('slideNumber');
+  const navQuickMenu = document.getElementById('navQuickMenu');
   const totalSlides = slides.length;
 
   let currentSlide = 0;
@@ -24,6 +25,7 @@
     updateUI();
     bindEvents();
     triggerAnimations(0);
+    bindQuickNav();
   }
 
   // ---- Create Navigation Dots ----
@@ -35,6 +37,40 @@
       dot.addEventListener('click', () => goToSlide(i));
       navDots.appendChild(dot);
     }
+  }
+
+  // ---- Quick Nav: bind items & toggle ----
+  function bindQuickNav() {
+    if (!navIndicator || !navQuickMenu) return;
+
+    // 팝업 열기/닫기 토글
+    navIndicator.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navQuickMenu.classList.toggle('open');
+      navIndicator.classList.toggle('open', isOpen);
+    });
+
+    // 팝업 항목 클릭 → 슬라이드 이동 후 닫기
+    navQuickMenu.querySelectorAll('.nav-quick-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        const idx = parseInt(item.dataset.slide, 10);
+        goToSlide(idx);
+        closeQuickNav();
+      });
+    });
+
+    // 외부 클릭 시 닫기
+    document.addEventListener('click', (e) => {
+      if (!navQuickMenu.contains(e.target) && e.target !== navIndicator) {
+        closeQuickNav();
+      }
+    });
+  }
+
+  function closeQuickNav() {
+    if (!navQuickMenu || !navIndicator) return;
+    navQuickMenu.classList.remove('open');
+    navIndicator.classList.remove('open');
   }
 
   // ---- Navigate to Slide ----
@@ -78,8 +114,8 @@
       dot.classList.toggle('active', i === currentSlide);
     });
 
-    // Nav indicator
-    navIndicator.textContent = `${currentSlide + 1} / ${totalSlides}`;
+    // Nav indicator text
+    navIndicator.textContent = `${currentSlide + 1} / ${totalSlides}  ▼`;
 
     // Slide number
     slideNumber.textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
@@ -87,6 +123,14 @@
     // Button states
     btnPrev.disabled = currentSlide === 0;
     btnNext.disabled = currentSlide === totalSlides - 1;
+
+    // Quick nav: highlight current item
+    if (navQuickMenu) {
+      navQuickMenu.querySelectorAll('.nav-quick-item').forEach((item) => {
+        const idx = parseInt(item.dataset.slide, 10);
+        item.classList.toggle('current', idx === currentSlide);
+      });
+    }
   }
 
   // ---- Trigger Slide Animations ----
@@ -132,6 +176,9 @@
           e.preventDefault();
           goToSlide(totalSlides - 1);
           break;
+        case 'Escape':
+          closeQuickNav();
+          break;
       }
     });
 
@@ -142,7 +189,6 @@
 
       if (hasOverflow) {
         // Allow default vertical scrolling if there's content to scroll
-        // Do not call e.preventDefault() to allow natural OS scroll behavior
       } else {
         // If no overflow, we still don't want to change slides via wheel
         e.preventDefault();
