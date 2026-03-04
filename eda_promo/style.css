@@ -3341,15 +3341,15 @@ body {
 }
 
 .bvcl-delay-1 {
-  animation-delay: 0.4s;
+  animation-delay: 1.0s;
 }
 
 .bvcl-delay-2 {
-  animation-delay: 0.8s;
+  animation-delay: 1.8s;
 }
 
 .bvcl-delay-3 {
-  animation-delay: 1.2s;
+  animation-delay: 2.6s;
 }
 
 @keyframes bvclFadeIn {
@@ -3420,7 +3420,7 @@ body {
   background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
   border-radius: 3px;
   transform-origin: left;
-  animation: bvtGrow 1.8s var(--ease-out-expo) 1.5s both;
+  animation: bvtGrow 5.8s var(--ease-out-expo) 3.0s both;
 }
 
 .bvcl-covpct {
